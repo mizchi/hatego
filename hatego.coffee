@@ -24,7 +24,7 @@ do update = ->
     currentCount = data.count
     if currentCount > lastCount
       console.log new Date
-      outputs = data.bookmarks[lastCount..]
+      outputs = data.bookmarks[lastCount..].reverse()
       p outputs
 
       if argv.growl and lastCount > 0
