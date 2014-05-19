@@ -2,27 +2,11 @@
 
 Hatego is hatena bookmark watcher (hatena ego searcher)
 
-## Install 
-
 ```
 npm install -g mizchi/hatego
 ```
 
-if you use growl, install like below.
-
-### Mac
-
-```
-gem install terminal-notifier
-```
-
-### linux`
-
-```
-apt-get install libnotify-bin
-```
-
-## How to use
+Use it!
 
 ```
 $ hatego --interval 5 --growl http://mizchi.hatenablog.com/entry/2014/05/20/005039
@@ -50,4 +34,23 @@ Tue May 20 2014 03:32:58 GMT+0900 (JST)
 ```
 
 `-i minute`: interval
+
 `-g`: notify growl
+
+
+## Growl options
+
+if you use growl, install like below.
+
+### Mac
+
+```
+gem install terminal-notifier
+```
+
+### linux
+
+```
+apt-get install libnotify-bin
+```
+
