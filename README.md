@@ -9,27 +9,14 @@ npm install -g mizchi/hatego
 Use it!
 
 ```
-$ hatego --interval 5 --growl http://mizchi.hatenablog.com/entry/2014/05/20/005039
-Tue May 20 2014 03:32:58 GMT+0900 (JST)
-- 
-  timestamp: 2014/05/20 03:15:48
-  comment:   
-  user:      sidebiz
-  tags: 
-    (empty array)
-- 
-  timestamp: 2014/05/20 02:58:35
-  comment:   モバイル環境でDOM挿入する時innerHTMLとappendNodeどっちが速いの？という話 - mizchi's blog
-  user:      hiroshi_revolution
-  tags: 
-    (empty array)
-- 
-  timestamp: 2014/05/20 01:45:36
-  comment:   
-  user:      kenzy_n
-  tags: 
-    - モバイル
-    - ライブラリ
+~/p/hatego (master) $ hatego -i 10 -g http://mizchi.hatenablog.com/entry/2014/05/19/013918 http://mizchi.hatenablog.com/entry/2014/05/17/070412
+めっちゃヤク刈った - mizchi's blog - [1] mizchi:[]: 作業ログです
+めっちゃヤク刈った - mizchi's blog - [2] Qurage:[#dev,memo]:  mizchi さんの作業ログ
+めっちゃヤク刈った - mizchi's blog - [3] yosuke_furukawa:[]: わかる、俺もTypeScript型定義からjsxバインディング自動で作ろうとしてparseしてさてこっからどうしよう、、、というところで止まってる、ネスト深い。
+めっちゃヤク刈った - mizchi's blog - [4] ruicc:[]: 確かに*.d.tsパースして型情報ほしい
+めっちゃヤク刈った - mizchi's blog - [5] hintoku:[]: 
+タッチタイピング矯正器としての無刻印キーボードが良いという話と、無刻印の辛い点 - mizchi's blog - [1] mizchi:[]: 書いた
+タッチタイピング矯正器としての無刻印キーボードが良いという話と、無刻印の辛い点 - mizchi's blog - [2] netcraft:[]: HHKB無刻印には強力な矯正作用があったのですね。HHKB Proだけで満足してしまっていました。今度買ってみてタッチタイピング頑張ってみます！
 ...
 ```
 
@@ -37,6 +24,7 @@ Tue May 20 2014 03:32:58 GMT+0900 (JST)
 
 `-g`: notify growl
 
+`-t`: show title(if you add more than two url, it will be actiavted automatically)
 
 ## Growl options
 

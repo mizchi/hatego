@@ -1,39 +1,46 @@
 #!/usr/bin/env coffee
-###
-npm install prettyjson request optimist
-###
 request = require 'request'
 pj = require 'prettyjson'
 p = -> console.log pj.render arguments...
 argv = require('optimist')
   .alias('i', 'interval')
   .alias('g', 'growl')
+  .alias('t', 'title')
   .boolean('growl')
+  .boolean('title')
   .argv
 
-lastCount = 0
-url = encodeURIComponent argv._[0]
+output = (data, title = "", growl = false)->
+  for i in data
+    tags = "[" + i.tags.join(',') + "]"
+    text ="[#{i.nth}] #{i.user}:#{tags}: #{i.comment}"
 
-do update = ->
-  request.get 'http://b.hatena.ne.jp/entry/jsonlite/?url='+url, (err, data) =>
-    if err
-      console.log err
-      process.exit 1
+    if argv._.length > 1 or argv.title
+      text = title + " - " + text
 
-    data = JSON.parse data.body
-    currentCount = data.count
-    if currentCount > lastCount
-      console.log new Date
-      outputs = data.bookmarks[lastCount..].reverse()
-      p outputs
+    if growl
+      growl text
+    else
+      console.log text
 
-      if argv.growl and lastCount > 0
-        growl = require 'growl'
-        for i in outputs
-          console.log 'coffee script', i
-          growl "#{i.user}: #{i.comment}"
-    # else
-      # process.stdout.write '.'
-    lastCount = currentCount
+update = (url) ->
+  burl = 'http://b.hatena.ne.jp/entry/jsonlite/?url='+encodeURIComponent(url)
+  lastCount = 0
+  ->
+    request.get burl, (err, data) ->
+      if err
+        console.log err
+        process.exit 1
+      data = JSON.parse data.body
+      data.bookmarks.forEach (b, i) -> b['nth'] = data.bookmarks.length-i
+      currentCount = data.count
+      if currentCount > lastCount
+        diff = data.bookmarks[lastCount..].reverse()
+        output diff, data.title, false
+        if argv.growl and lastCount > 0
+          output diff, data.title, true
+      lastCount = currentCount
 
-setInterval update, (argv.interval ? 30) * 1000
+for url in argv._
+  do f = update(url)
+  setInterval f, (Math.min argv.interval ? 30, 30) * 1000
